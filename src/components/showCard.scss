@@ -1,0 +1,66 @@
+
+
+$card-width: 20rem;
+$card-padding: 0.625rem;
+$image-size: 6.25rem;
+$spacing: 1.25rem;
+$text-spacing: 0.3125rem;
+
+$icon-size: 1.5rem; // Size of the heart icon
+$icon-position: 0.5rem; // Distance of the icon from the top and right edge of the card
+
+.card {
+  text-align: center;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: $card-padding;
+  max-width: $card-width;
+  box-shadow: 0px 0px 0.9375rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.3125rem;
+  margin: $spacing;
+
+  img {
+    width: $image-size;
+    height: $image-size;
+    object-fit: cover;
+    border-radius: 0.3125rem;
+    margin-right: $spacing;
+  }
+
+  .card-details {
+    display: flex;
+    flex-direction: column; // Stacks the name, score, and genre vertically
+
+    .name,
+    .score,
+    .genre {
+      margin-bottom: $text-spacing;
+    }
+
+    // Additional styling to distinguish the different text fields
+    .name {
+      font-size: 1.5em;
+    }
+
+
+    .genre {
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+  }
+  .heart-icon {
+    align-items: flex-start;
+    margin-left: 2rem;
+    font-size: $icon-size;
+    border: black;
+    color: black; // Default color
+    cursor: pointer; // Hand pointer on hover to indicate it's clickable
+    transition: color 0.3s ease; // Smooth transition for color changes
+
+    &.active {
+      color: red; // Active state color
+    }
+  }
+}
