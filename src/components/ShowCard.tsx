@@ -1,40 +1,34 @@
-import React from "react";
+import React, {} from "react";
 import {ITVSeriesDBData} from "../services/tvseries/tvSeriesDB";
 
 
-export interface IMovieItem{
-    image: string;
-    title: string;
-    score: number;
-    genres: string[];
-}
-
 export interface IMovieCardProps {
-    myShow: ITVSeriesDBData;
-    onAddToFavorites: () => void;
-    onRemoveFromFavorites: () => void;
-}
-
-export interface IMovieCardState {
     isFavorite: boolean;
+    myShow: ITVSeriesDBData;
+    onAddToFavorites: () => Promise<void>;
+    onRemoveFromFavorites: () => Promise<void>;
 }
 
 export const ShowCard: React.FC<IMovieCardProps> = (props:IMovieCardProps  ) => {
-
-    const [isFavorite, setIsFavorite] = React.useState(false);
+    const [isFavorite, setIsFavorite] = React.useState(props.isFavorite);
     const {myShow} = props;
     const {show,score} = myShow;
 
-
     const toggleFavorite = async () => {
-      setIsFavorite(!isFavorite)
+        if (isFavorite) {
+             await props.onRemoveFromFavorites();
+        }
+        else {
+            await props.onAddToFavorites();
+        }
+        setIsFavorite(!isFavorite)
     }
 
     return (
         <div className="card" key={show.id} id={show.id.toString()}>
             {
             show.image &&
-                    <img src={show.image.medium} />
+                    <img src={show.image.medium}  alt={show.image.original}/>
             }
             <div className={"card-details"}>
                 <div className="name">

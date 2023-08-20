@@ -3,18 +3,14 @@ import {IConnectionBehavior, IRequestHeaders} from "./types";
 
 export class ConnectionBehaviorAxios implements IConnectionBehavior {
 
-    constructor() {
-    }
-
-    private getRequestConfig(headers?:IRequestHeaders): AxiosRequestConfig {
-        const options: AxiosRequestConfig = {
+   private getRequestConfig(headers?:IRequestHeaders): AxiosRequestConfig {
+       return {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 ...headers
             }
-        }
-        return options;
+        };
     }
     async get<T = any>(url: string, headers?:IRequestHeaders): Promise<T> { //todo: define headers type
         return this.fetchJson<T>(url, "GET", this.getRequestConfig(headers));

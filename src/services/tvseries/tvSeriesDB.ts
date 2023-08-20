@@ -1,4 +1,3 @@
-
 //this type can be enhanced with more fields according to the API
 import {connectionService} from "../connection/connectionService";
 import {ICacheBehavior} from "../cacheService/types";
@@ -8,16 +7,13 @@ export interface ITVSeriesDBData {
     score: number;
     show: {
         id: number;
-        url: string;
         name: string;
-        type: string;
-        language: string;
         genres: string[];
-        status: string;
         image: {
             medium: string;
             original: string;
         }
+        isFavorite?: boolean ;
     }
 
 }
@@ -33,8 +29,7 @@ class TVSeriesDB implements ITVSeriesDB {
         const cachedData = await this.cache.get(query);
         if(cachedData){
             console.log('cached data');
-            const moviesData = JSON.parse(cachedData);
-            return moviesData;
+            return JSON.parse(cachedData);
         }
         else {
             const data = await connectionService.get<ITVSeriesDBData[]>(this.url + query);

@@ -6,8 +6,8 @@ $image-size: 6.25rem;
 $spacing: 1.25rem;
 $text-spacing: 0.3125rem;
 
-$icon-size: 1.5rem; // Size of the heart icon
-$icon-position: 0.5rem; // Distance of the icon from the top and right edge of the card
+$icon-size: 1.5rem;
+$icon-position: 0.5rem;
 
 .card {
   text-align: center;
@@ -30,15 +30,13 @@ $icon-position: 0.5rem; // Distance of the icon from the top and right edge of t
 
   .card-details {
     display: flex;
-    flex-direction: column; // Stacks the name, score, and genre vertically
+    flex-direction: column;
 
     .name,
     .score,
     .genre {
       margin-bottom: $text-spacing;
     }
-
-    // Additional styling to distinguish the different text fields
     .name {
       font-size: 1.5em;
     }
@@ -55,12 +53,23 @@ $icon-position: 0.5rem; // Distance of the icon from the top and right edge of t
     margin-left: 2rem;
     font-size: $icon-size;
     border: black;
-    color: black; // Default color
-    cursor: pointer; // Hand pointer on hover to indicate it's clickable
-    transition: color 0.3s ease; // Smooth transition for color changes
+    color: black;
+    cursor: pointer;
 
     &.active {
-      color: red; // Active state color
+      color: red;
     }
+  }
+}
+@media (max-width: 480px) { /* mobile phones */
+  $card-width: 50%;
+
+  .card {
+    flex-direction: column;
+  }
+
+  img {
+    margin-right: 0;
+    width: 30%;
   }
 }
