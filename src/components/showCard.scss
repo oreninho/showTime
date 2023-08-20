@@ -55,9 +55,12 @@ $icon-position: 0.5rem;
     border: black;
     color: black;
     cursor: pointer;
+    font-weight: 100;
+    height: 6rem;
 
     &.active {
       color: red;
+      font-weight: 900;
     }
   }
 }
