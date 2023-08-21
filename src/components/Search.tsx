@@ -1,11 +1,11 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
+import React, {useState, ChangeEvent, KeyboardEvent} from 'react';
 
 interface ISearchProps {
     onSearch?: (value: string) => Promise<void>;
     placeholder?: string;
 }
 
-const Search: React.FC<ISearchProps> = ({ onSearch, placeholder = '' }) => {
+const Search: React.FC<ISearchProps> = ({onSearch, placeholder = 'Search...'}) => {
     const [searchValue, setSearchValue] = useState<string>('');
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

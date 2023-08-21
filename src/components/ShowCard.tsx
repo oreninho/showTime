@@ -9,16 +9,15 @@ export interface IMovieCardProps {
     onRemoveFromFavorites: () => Promise<void>;
 }
 
-export const ShowCard: React.FC<IMovieCardProps> = (props:IMovieCardProps  ) => {
+export const ShowCard: React.FC<IMovieCardProps> = (props: IMovieCardProps) => {
     const [isFavorite, setIsFavorite] = React.useState(props.isFavorite);
     const {myShow} = props;
-    const {show,score} = myShow;
+    const {show, score} = myShow;
 
     const toggleFavorite = async () => {
         if (isFavorite) {
-             await props.onRemoveFromFavorites();
-        }
-        else {
+            await props.onRemoveFromFavorites();
+        } else {
             await props.onAddToFavorites();
         }
         setIsFavorite(!isFavorite)
@@ -27,15 +26,14 @@ export const ShowCard: React.FC<IMovieCardProps> = (props:IMovieCardProps  ) => 
     return (
         <div className="card" key={show.id} id={show.id.toString()}>
             {
-            show.image &&
-                    <img src={show.image.medium}  alt={show.image.original}/>
+                <img src={show.image&& show.image.medium} alt={show.image&&show.image.original}/>
             }
             <div className={"card-details"}>
                 <div className="name">
                     {show.name}
                 </div>
                 <div className="score">
-                    { Math.round(score * 100) / 10  }
+                    {Math.round(score * 100) / 10}
                 </div>
                 {
                     show.genres &&

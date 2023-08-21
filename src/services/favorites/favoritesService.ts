@@ -1,7 +1,9 @@
 import {ITVSeriesDBData} from "../tvseries/tvSeriesDB";
-import {FAVORITES_TABLE_NAME, IFavoritesBehavior} from "./favoriteUsingDb";
+import {FAVORITES_TABLE_NAME, IFavoritesBehavior} from "./types";
 
-
+/*
+all the related db code is not used in this project
+ */
 class FavoritesService implements IFavoritesBehavior {
     private db = localStorage;
     private static FAVORITES_KEY = FAVORITES_TABLE_NAME;
@@ -12,11 +14,11 @@ class FavoritesService implements IFavoritesBehavior {
     }
 
     getFavorites(): Promise<ITVSeriesDBData[]> {
-        return JSON.parse(this.db.getItem(FavoritesService.FAVORITES_KEY));
+        return JSON.parse(this.db.getItem(FavoritesService.FAVORITES_KEY) || '[]');
     }
 
-    addFavorite(data:ITVSeriesDBData): Promise<boolean> {
-        let currentFavorites = JSON.parse(this.db.getItem(FavoritesService.FAVORITES_KEY));
+    async addFavorite(data:ITVSeriesDBData): Promise<boolean> {
+        let currentFavorites = await this.getFavorites();
         if (!currentFavorites.some((item:ITVSeriesDBData)=>
             item.show && item.show.id.toString() === data.show.id.toString())) {
             currentFavorites.push(data);
@@ -40,7 +42,7 @@ class FavoritesService implements IFavoritesBehavior {
     }
 
     async isFavorite(tvSeriesId: string): Promise<boolean> {
-        const currentFavorites = JSON.parse(this.db.getItem(FAVORITES_TABLE_NAME));
+        const currentFavorites = JSON.parse(this.db.getItem(FAVORITES_TABLE_NAME)||'[]');
         if (currentFavorites) {
             return currentFavorites.some((item:ITVSeriesDBData)=>item.show.id.toString() === tvSeriesId);
         }

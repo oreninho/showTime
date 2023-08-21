@@ -3,6 +3,7 @@ import {connectionService} from "../connection/connectionService";
 import {ICacheBehavior} from "../cacheService/types";
 import {cacheService} from "../cacheService/cacheService";
 
+export const TV_SERIES_DB_URL = 'https://api.tvmaze.com/search/shows?q=';
 export interface ITVSeriesDBData {
     score: number;
     show: {
@@ -23,7 +24,7 @@ export interface ITVSeriesDB {
 
 
 class TVSeriesDB implements ITVSeriesDB {
-    private readonly url: string = "http://api.tvmaze.com/search/shows?q="; //not secure, but it's ok for this exercise
+    private readonly url: string = TV_SERIES_DB_URL;
     private cache:ICacheBehavior = cacheService;
     async searchTVSeries(query: string): Promise<ITVSeriesDBData[]> {
         const cachedData = await this.cache.get(query);

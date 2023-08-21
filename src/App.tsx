@@ -33,6 +33,8 @@ function App() {
             }
         }
         fetchFavorites().then((favoredShows) => {
+            if (!favoredShows)
+                return;
             setFavorites(favoredShows);
 
         });
@@ -72,7 +74,7 @@ function App() {
                 <div className="tvSeries">
                     <h2>Search Results</h2>
                     {tvSeries.length>0 && tvSeries.map((tvSeries: ITVSeriesDBData) => (
-                        <ShowCard key={tvSeries.show.id} myShow={tvSeries} isFavorite={tvSeries.show.isFavorite}
+                        <ShowCard key={tvSeries.show.id} myShow={tvSeries} isFavorite={tvSeries.show.isFavorite||false}
                                   onAddToFavorites={()=>addToFavorites(tvSeries)} onRemoveFromFavorites={()=>removeFromFavorites(tvSeries)}/>
                     ))}
                     {tvSeries.length===0 && <div>No results</div>}

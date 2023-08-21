@@ -1,10 +1,15 @@
 @use "src/components/showCard";
+
 $margin: 10rem;
 
 
 .App {
   display: flex;
   flex-direction: column;
+  @media (min-width: 768px) {
+    margin-left: 30rem;
+  }
+
 }
 
 .App-logo {
@@ -19,7 +24,6 @@ $margin: 10rem;
 }
 
 
-
 .App-link {
   color: #61dafb;
 }
@@ -32,39 +36,47 @@ $margin: 10rem;
     transform: rotate(360deg);
   }
 }
-.showWrapper{
+
+.showWrapper {
   margin-left: $margin;
   display: flex;
   width: 100%;
-  h2{
+
+  h2 {
     margin-left: 2rem;
   }
 }
-.favorites{
- // width: 30%;
- // width: 0%;
-  margin-left: 2rem;
+
+.favorites {
+  margin-left: 1rem;
 }
-.tvSeries{
-    min-width: 40%;
+
+.tvSeries {
+  //min-width: 40%;
 }
-.search-box{
-  margin-left: $margin
+
+.search-box {
+  margin-left: $margin;
+
+  input {
+    padding: 0.5rem;
+  }
 }
-h1{
+
+h1 {
   margin-left: $margin;
 }
 
 /* Responsive behavior */
-@media (max-width: 768px) { /* tablet and below */
+@media (max-width: 768px) {
   .showWrapper {
-    flex-direction: column; /* Stack content vertically on small screens */
+    flex-direction: column;
     align-items: center;
-    margin-left: 2rem; /* Reduce margin for small screens */
+    margin-left: 2rem;
   }
 
   .tvSeries, .favorites {
-    min-width: 100%; /* Take full width on small screens */
+    min-width: 100%;
   }
 
   h1, .search-box {
@@ -72,7 +84,7 @@ h1{
   }
 
   .card {
-    margin: 1rem; /* Reduce spacing for cards on smaller screens */
+    margin: 1rem;
   }
 }
 

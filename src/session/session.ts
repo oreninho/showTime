@@ -6,9 +6,6 @@ import {LocalStorageCache} from "../services/cacheService/localStorageCache";
 import {ITVSeriesDBData} from "../services/tvseries/tvSeriesDB";
 
 import favoritesService from "../services/favorites/favoritesService";
-import {DbBehaviourIndexDB} from "../services/db/dbBehaviourIndexDB";
-import {FAVORITES_TABLE_NAME, favoritesDBService, FavoritesSchema} from "../services/favorites/favoriteUsingDb";
-import {db} from "../services/db/db";
 
 
 export class Session{
@@ -19,11 +16,7 @@ export class Session{
         if (Session.isInitialized){
             return;
         }
-        const dbBehaviour = new DbBehaviourIndexDB("tvseries");
-        const keys = Object.keys(FavoritesSchema).join(',');
-        await dbBehaviour.init(FAVORITES_TABLE_NAME,keys);
-        db.init(dbBehaviour);
-        await favoritesDBService.init()
+
         connectionService.init(new ConnectionBehaviorAxios());
         cacheService.init(new LocalStorageCache());
         console.log('Session initialized');
